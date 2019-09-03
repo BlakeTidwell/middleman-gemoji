@@ -33,7 +33,7 @@ module Middleman
       def install
         app    = ::Middleman::Application
         target = File.join(app.root, app.config.source, options[:path])
-        source = File.expand_path('../../images/emoji/*', `gem which gemoji`)
+        source = File.expand_path('../../images/*', `gem which gemoji`)
 
         `mkdir -p #{target} && cp -Rp #{source} #{target}`
       end

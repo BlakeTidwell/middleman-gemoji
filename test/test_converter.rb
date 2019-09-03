@@ -1,6 +1,24 @@
 require './test/test_helper'
 require './lib/middleman-gemoji/converter'
 
+module Middleman
+  class Application
+    attr_reader :root
+    attr_accessor :config
+
+    def initialize
+      @config = OpenStruct.new(
+        source: 'source',
+        http_prefix: ''
+      )
+    end
+
+    def root
+      ENV['MM_ROOT']
+    end
+  end
+end
+
 class TestConverter < Minitest::Test
   def setup
     @root = ENV['MM_ROOT']
@@ -28,7 +46,7 @@ class TestConverter < Minitest::Test
 
   def test_convert_received_blank
     assert_equal('', @converter.convert(''))
-    assert_equal(nil, @converter.convert(nil))
+    assert_nil(@converter.convert(nil))
   end
 
   def test_emojify
@@ -107,7 +125,7 @@ class TestConverter < Minitest::Test
     )
   end
 
-  def test_size_rerutn_nil
+  def test_size_return_nil
     @converter.options[:size] = nil
     assert_nil(@converter.size)
   end
