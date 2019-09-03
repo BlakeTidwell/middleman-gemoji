@@ -32,4 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rb-inotify", "~> 0.9"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "minitest-reporters"
+  spec.add_development_dependency "guard"
+  spec.add_development_dependency "guard-minitest", "~> 2.4.6"
 end

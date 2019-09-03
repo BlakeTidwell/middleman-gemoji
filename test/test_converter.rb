@@ -62,10 +62,12 @@ class TestConverter < Minitest::Test
   end
 
   def test_emojify_inner_body
-    html = "<html><head><title>something title :+1:</title></head><body>\n<p>somethig emoji :+1:</p>\n</body></html>"
+    html = "<html><head><title>something title :+1:</title></head><body>\n<p>:cat:somethig emoji :+1:</p>\n</body></html>"
     result = @converter.emojify_inner_body(html)
     assert_match(/1f44d.png/, result)
     assert_match(/something title :\+1:/, result)
+    assert_match(/<body>/, result)
+    assert_match(/<\/body>/, result)
   end
 
   def test_emojify_inner_body_received_normal_string
